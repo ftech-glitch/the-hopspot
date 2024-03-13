@@ -4,6 +4,7 @@ body {
   margin: 0;
   background-color: black;
   color: white;
+  text-align: center;
 }
 
 h1,
@@ -125,4 +126,9 @@ a {
     left: 45%;
     top: 40%;
   }
+}
+
+.modal-text {
+  color: black;
+  text-align: left;
 }
