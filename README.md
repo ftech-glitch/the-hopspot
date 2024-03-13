@@ -1,1 +1,1 @@
-# the-hopspot
+# The HopSpot
