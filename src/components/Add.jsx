@@ -9,6 +9,7 @@ const Add = () => {
   const [province, setProvince] = useState("");
   const [contact, setContact] = useState("");
   const [website, setWebsite] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,9 +42,22 @@ const Add = () => {
       });
       const result = await response.json();
       console.log(result);
+      setName("");
+      setType("");
+      setAddress("");
+      setPostal("");
+      setCity("");
+      setProvince("");
+      setContact("");
+      setWebsite("");
+      setShowSuccess(true);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
   };
 
   return (
@@ -157,6 +171,14 @@ const Add = () => {
           </button>
         </div>
       </form>
+      {showSuccess && (
+        <div className="alert alert-success" role="alert">
+          Form submitted successfully!
+          <button type="button" className="close" onClick={handleCloseSuccess}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      )}
     </>
   );
 };
