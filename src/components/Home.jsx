@@ -1,10 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Details.module.css";
 
 const Home = () => {
   const [randomBrewery, setRandomBrewery] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [breweriesList, setBreweriesList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // fetch list of breweries
+  useEffect(() => {
+    const fetchBreweries = async (page) => {
+      try {
+        const response = await fetch(
+          `https://api.openbrewerydb.org/breweries?page=${page}`
+        );
+        const data = await response.json();
+        setBreweriesList((prevBreweries) => [...prevBreweries, ...data]);
+        if (page === 1) {
+          setTotalPages(data.total_pages);
+        }
+      } catch (error) {
+        console.error("Failed to fetch breweries:", error);
+      }
+    };
+
+    fetchBreweries(currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  }, [currentPage, totalPages]);
 
   const getRandomBrewery = async () => {
     try {

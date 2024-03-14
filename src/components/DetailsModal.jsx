@@ -12,6 +12,7 @@ const OverLay = (props) => {
       <div className={styles.modal}>
         <div className="row">
           <h5 className="modal-text">{props.brewery.name}</h5>
+          <p className="modal-text">Type: {props.brewery.brewery_type}</p>
           <p className="modal-text">
             {" "}
             Address: {props.brewery.street}, {props.brewery.postal_code}

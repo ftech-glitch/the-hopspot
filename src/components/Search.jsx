@@ -9,42 +9,80 @@ const Search = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedBrewery, setSelectedBrewery] = useState(null);
 
-  const getBreweries = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `https://api.openbrewerydb.org/breweries/search?query=${input}`
-      );
-      const data = await response.json();
+  // fetch data from airtable (for newly added breweries from the submit form)
+  const getAirtableData = async () => {
+    const airtableAPI =
+      "https://api.airtable.com/v0/appQPGY7SNCdqDtdV/Table%201?maxRecords=100&view=Grid%20view";
+    const headers = {
+      Authorization: `Bearer patxkA4uOl3Cyh9sV.adcda182ede1acc1b0a6684224f61b1b7d78439ac2f7376b6b09a554bdb8f675`,
+      "Content-Type": "application/json",
+    };
 
-      setTimeout(() => {
-        if (data.length < 1) {
-          setEmptyResult(true);
-        }
-        setBreweries(data);
-        setLoading(false);
-      }, 500);
+    try {
+      const response = await fetch(airtableAPI, { headers });
+      const data = await response.json();
+      return data.records;
     } catch (error) {
-      console.error(error.message);
-      alert("Error fetching brewery data");
+      console.error("Error fetching data from Airtable:", error);
+      return [];
     }
   };
 
+  // search for breweries based on search term
+  const getBreweries = async () => {
+    setLoading(true);
+    const query = encodeURIComponent(input);
+
+    const openBreweryResponse = await fetch(
+      `https://api.openbrewerydb.org/breweries/search?query=${query}`
+    );
+
+    const openBreweryData = await openBreweryResponse.json();
+
+    const airtableData = await getAirtableData();
+
+    const transformedAirtableData = airtableData.map((record) => ({
+      id: record.id,
+      name: record.fields.Name,
+      city: record.fields.City,
+      state: record.fields.State,
+      brewery_type: record.fields.Type,
+      street: record.fields.Address,
+      postal_code: record.fields.Postal,
+      phone: record.fields.Contact,
+      website_url: record.fields.Website,
+    }));
+
+    const combinedData = [...openBreweryData, ...transformedAirtableData];
+
+    if (combinedData.length < 1) {
+      setEmptyResult(true);
+    } else {
+      setEmptyResult(false);
+    }
+    setBreweries(combinedData);
+    setLoading(false);
+  };
+
+  // clear button
   const handleClearingResults = () => {
     setBreweries([]);
     setEmptyResult(false);
     setInput("");
   };
 
+  // search button
   const handleBreweryClick = (brewery) => {
     setShowUpdateModal(true);
     setSelectedBrewery(brewery);
   };
 
+  // close modal button
   const handleCloseModal = () => {
     setShowUpdateModal(false);
   };
 
+  // sort breweries in alphabetical order
   const sortBreweries = breweries
     .sort(function (a, b) {
       if (a.name < b.name) {
