@@ -44,6 +44,8 @@ const OverLay = (props) => {
                 fields: {
                   Name: editedBrewery.fields.name,
                   Type: editedBrewery.fields.brewery_type,
+                  City: editedBrewery.fields.city,
+                  State: editedBrewery.fields.state,
                   Address: editedBrewery.fields.street,
                   Postal: editedBrewery.fields.postal_code,
                   Contact: editedBrewery.fields.phone,

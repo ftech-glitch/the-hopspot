@@ -30,6 +30,26 @@ const UpdateForm = ({
         />
       </div>
       <div className="row">
+        <p className="modal-text col-md-2">City: </p>
+        <input
+          className="col-md-4"
+          type="text"
+          name="city"
+          value={editedBrewery.fields.city}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className="row">
+        <p className="modal-text col-md-2">State: </p>
+        <input
+          className="col-md-4"
+          type="text"
+          name="state"
+          value={editedBrewery.fields.state}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className="row">
         <p className="modal-text col-md-2">Address: </p>
         <input
           className="col-md-4"
