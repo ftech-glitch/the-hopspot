@@ -11,6 +11,7 @@ const Add = () => {
   const [website, setWebsite] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // add new brewery to airtable
   const handleSubmit = async (e) => {
     e.preventDefault();
     const airtableAPI =
@@ -56,12 +57,14 @@ const Add = () => {
     }
   };
 
+  // close alert message
   const handleCloseSuccess = () => {
     setShowSuccess(false);
   };
 
   return (
     <>
+      {/* form submission */}
       <form onSubmit={handleSubmit}>
         <div className="row">
           <label className="col-md-2">Name:</label>
@@ -171,6 +174,7 @@ const Add = () => {
           </button>
         </div>
       </form>
+      {/* alert message */}
       {showSuccess && (
         <div className="alert alert-success" role="alert">
           Form submitted successfully!
