@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Details.module.css";
-import BreweriesList from "./BreweriesList";
 
 const Home = () => {
   const [randomBrewery, setRandomBrewery] = useState(null);
