@@ -1,50 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Details.module.css";
+import BreweriesList from "./BreweriesList";
 
 const Home = () => {
   const [randomBrewery, setRandomBrewery] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [breweriesList, setBreweriesList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [allBreweries, setAllBreweries] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
 
-  // fetch list of breweries
+  // fetch full brewery list
   useEffect(() => {
-    const fetchBreweries = async (page) => {
-      try {
-        const response = await fetch(
-          `https://api.openbrewerydb.org/breweries?page=${page}`
-        );
-        const data = await response.json();
-        setBreweriesList((prevBreweries) => [...prevBreweries, ...data]);
-        if (page === 1) {
-          setTotalPages(data.total_pages);
-        }
-      } catch (error) {
-        console.error("Failed to fetch breweries:", error);
-      }
-    };
-
-    fetchBreweries(currentPage);
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  }, [currentPage, totalPages]);
-
-  const getRandomBrewery = async () => {
-    try {
+    const fetchBreweries = async () => {
+      setLoading(true);
       const response = await fetch(
-        "https://api.openbrewerydb.org/v1/breweries/random"
+        `https://api.openbrewerydb.org/breweries?page=${page}&per_page=50`
       );
       const data = await response.json();
-      setRandomBrewery(data);
+      if (data.length > 0) {
+        setAllBreweries((prevBreweries) => [...prevBreweries, ...data]);
+        setPage((prevPage) => prevPage + 1);
+      } else {
+        setHasMore(false);
+      }
+      setLoading(false);
+    };
+
+    fetchBreweries();
+  }, [page]);
+
+  // generate a random brewery from full brewery list
+  const getRandomBrewery = () => {
+    if (allBreweries.length > 0) {
+      const randomIndex = Math.floor(Math.random() * allBreweries.length);
+      setRandomBrewery(allBreweries[randomIndex]);
       setShowModal(true);
-    } catch (error) {
-      console.error("Error fetching random brewery:", error.message);
     }
   };
 
