@@ -15,7 +15,7 @@ const UpdateForm = ({
           className="col-md-4"
           type="text"
           name="name"
-          value={editedBrewery.name}
+          value={editedBrewery.fields.name}
           onChange={handleInputChange}
         />
       </div>
@@ -25,7 +25,7 @@ const UpdateForm = ({
           className="col-md-4"
           type="text"
           name="brewery_type"
-          value={editedBrewery.brewery_type}
+          value={editedBrewery.fields.brewery_type}
           onChange={handleInputChange}
         />
       </div>
@@ -35,7 +35,7 @@ const UpdateForm = ({
           className="col-md-4"
           type="text"
           name="street"
-          value={editedBrewery.street}
+          value={editedBrewery.fields.street}
           onChange={handleInputChange}
         />
       </div>
@@ -45,7 +45,7 @@ const UpdateForm = ({
           className="col-md-4"
           type="text"
           name="postal_code"
-          value={editedBrewery.postal_code}
+          value={editedBrewery.fields.postal_code}
           onChange={handleInputChange}
         />
       </div>
@@ -55,7 +55,7 @@ const UpdateForm = ({
           className="col-md-4"
           type="text"
           name="phone"
-          value={editedBrewery.phone}
+          value={editedBrewery.fields.phone}
           onChange={handleInputChange}
         />
       </div>
@@ -65,7 +65,7 @@ const UpdateForm = ({
           className="col-md-4"
           type="text"
           name="website_url"
-          value={editedBrewery.website_url}
+          value={editedBrewery.fields.website_url}
           onChange={handleInputChange}
         />
       </div>

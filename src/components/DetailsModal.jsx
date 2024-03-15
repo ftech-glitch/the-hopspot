@@ -4,7 +4,9 @@ import styles from "./Details.module.css";
 import UpdateForm from "./UpdateForm";
 
 const OverLay = (props) => {
-  const [editedBrewery, setEditedBrewery] = useState({ ...props.brewery });
+  const [editedBrewery, setEditedBrewery] = useState({
+    fields: { ...props.brewery },
+  });
   const [editMode, setEditMode] = useState(false);
 
   // close modal
@@ -17,7 +19,10 @@ const OverLay = (props) => {
     const { name, value } = e.target;
     setEditedBrewery((prevBrewery) => ({
       ...prevBrewery,
-      [name]: value,
+      fields: {
+        ...prevBrewery.fields,
+        [name]: value,
+      },
     }));
   };
 
@@ -36,7 +41,14 @@ const OverLay = (props) => {
             records: [
               {
                 id: props.brewery.id,
-                fields: { ...editedBrewery },
+                fields: {
+                  Name: editedBrewery.fields.name,
+                  Type: editedBrewery.fields.brewery_type,
+                  Address: editedBrewery.fields.street,
+                  Postal: editedBrewery.fields.postal_code,
+                  Contact: editedBrewery.fields.phone,
+                  Website: editedBrewery.fields.website_url,
+                },
               },
             ],
           }),
@@ -65,7 +77,7 @@ const OverLay = (props) => {
       <div className={styles.modal}>
         {editMode ? (
           <UpdateForm
-            editedBrewery={props.brewery}
+            editedBrewery={editedBrewery}
             handleInputChange={handleInputChange}
             handleSaveChanges={handleSaveChanges}
             handleCancel={handleCancel}
