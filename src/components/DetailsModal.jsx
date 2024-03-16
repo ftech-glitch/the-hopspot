@@ -87,13 +87,33 @@ const OverLay = (props) => {
         ) : (
           <div className="row">
             <h5 className="modal-text">{props.brewery.name}</h5>
+            <br />
             <p className="modal-text">Type: {props.brewery.brewery_type}</p>
+            <br />
             <p className="modal-text">
-              {" "}
-              Address: {props.brewery.street}, {props.brewery.postal_code}
+              Address:{" "}
+              <a
+                href={`https://www.google.com/maps?q=${props.brewery.street},${props.brewery.postal_code}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {props.brewery.street}, {props.brewery.postal_code}
+              </a>
             </p>
+            <br />
             <p className="modal-text">Phone: {props.brewery.phone}</p>
-            <p className="modal-text">Website: {props.brewery.website_url}</p>
+            <br />
+            <p className="modal-text">
+              Website:{" "}
+              <a
+                href={props.brewery.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {props.brewery.website_url}
+              </a>
+            </p>
+            <br />
             <button className="col-md-1" onClick={() => setEditMode(true)}>
               edit
             </button>

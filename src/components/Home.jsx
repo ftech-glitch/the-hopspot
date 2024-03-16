@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Details.module.css";
+import cheers from "./cheers.png";
+import glass from "./glass.png";
 
 const Home = () => {
   const [randomBrewery, setRandomBrewery] = useState(null);
@@ -119,6 +121,10 @@ const Home = () => {
   return (
     <>
       <br />
+      <div className="image-container">
+        <img src={cheers} alt="cheers" className="cheers" />
+      </div>
+      <br />
       <br />
       <h1 className="header">Discover Your Next HopSpot</h1>
       <h5 className="subheader">Connecting beer enthusiasts with breweries</h5>
@@ -150,13 +156,31 @@ const Home = () => {
         <div className={styles.backdrop}>
           <div className={styles.modal}>
             <div className="row">
+              <h5 className="modal-text">Your Brewery of the Day: </h5>
               <h5 className="modal-text">{randomBrewery.name}</h5>
+
               <p className="modal-text">
-                Address: {randomBrewery.street}, {randomBrewery.city},{" "}
-                {randomBrewery.state} {randomBrewery.postal_code}
+                Address:{" "}
+                <a
+                  href={`https://www.google.com/maps?q=${randomBrewery.street},${randomBrewery.postal_code}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {randomBrewery.street}, {randomBrewery.postal_code},{" "}
+                  {randomBrewery.city}, {randomBrewery.state}
+                </a>
               </p>
               <p className="modal-text">Phone: {randomBrewery.phone}</p>
-              <p className="modal-text">Website: {randomBrewery.website_url}</p>
+              <p className="modal-text">
+                Website:{" "}
+                <a
+                  href={randomBrewery.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {randomBrewery.website_url}
+                </a>
+              </p>
               <button className="col-md-1" onClick={handleCloseModal}>
                 close
               </button>

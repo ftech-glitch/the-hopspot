@@ -16,6 +16,10 @@ h6 {
   font-family: "Ruda", sans-serif;
 }
 
+h1 {
+  font-size: 50px;
+}
+
 a,
 p,
 input,
@@ -131,4 +135,14 @@ a {
 .modal-text {
   color: black;
   text-align: left;
+}
+
+.cheers {
+  width: 200px;
+  height: auto;
+}
+
+.glass {
+  width: 50px;
+  height: auto;
 }
