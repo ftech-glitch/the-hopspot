@@ -115,6 +115,7 @@ const OverLay = (props) => {
   return (
     <div className={styles.backdrop}>
       <div className={styles.modal}>
+        {/* edit modal*/}
         {editMode ? (
           <UpdateForm
             editedBrewery={editedBrewery}
@@ -123,6 +124,7 @@ const OverLay = (props) => {
             handleCancel={handleCancel}
           />
         ) : (
+          // details modal
           <div className="row align-items-center">
             <div className="row align-items-center">
               <div className="col-md-3 text-center">

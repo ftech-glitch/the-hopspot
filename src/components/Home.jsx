@@ -135,6 +135,7 @@ const Home = () => {
   return (
     <>
       <br />
+      {/* headers */}
       <div className="image-container">
         <img src={cheers} alt="cheers" className="cheers" />
       </div>
