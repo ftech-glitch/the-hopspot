@@ -13,7 +13,8 @@ The HopSpot utilizes the Open Brewery DB API to fetch brewery data. For more inf
 - React
 
 # Getting Started
-The HopSpot allows users to explore, search, and contribute to the database of breweries: nimble-brioche-173579.netlify.app
+The HopSpot allows users to explore, search, and contribute to the database of breweries: 
+[https://nimble-brioche-173579.netlify.app](https://nimble-brioche-173579.netlify.app/)
 
 Navigating the App
 - Home Page: Start at the home page to access the main features.
