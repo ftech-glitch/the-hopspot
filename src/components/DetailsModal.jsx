@@ -112,6 +112,62 @@ const OverLay = (props) => {
     return null;
   };
 
+  // handle phone function
+  const renderPhoneNumber = () => {
+    if (props.brewery.phone) {
+      return (
+        <p className="modal-text">Phone: {formatNumber(props.brewery.phone)}</p>
+      );
+    }
+    return <p className="modal-text">Phone: -</p>;
+  };
+
+  // handle type function
+  const renderType = () => {
+    if (props.brewery.brewery_type) {
+      return <p className="modal-text">Type: {props.brewery.brewery_type}</p>;
+    }
+    return <p className="modal-text">Type: -</p>;
+  };
+
+  // handle address function
+  const renderAddress = () => {
+    if (props.brewery.street && props.brewery.postal_code) {
+      return (
+        <p className="modal-text">
+          Address:{" "}
+          <a
+            href={`https://www.google.com/maps?q=${props.brewery.street},${props.brewery.postal_code}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {props.brewery.street}, {props.brewery.postal_code}
+          </a>
+        </p>
+      );
+    }
+    return <p className="modal-text">Address: -</p>;
+  };
+
+  // handle website function
+  const renderWebsite = () => {
+    if (props.brewery.website_url) {
+      return (
+        <p className="modal-text">
+          Website:{" "}
+          <a
+            href={props.brewery.website_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {props.brewery.website_url}
+          </a>
+        </p>
+      );
+    }
+    return <p className="modal-text">Website: -</p>;
+  };
+
   return (
     <div className={styles.backdrop}>
       <div className={styles.modal}>
@@ -137,30 +193,10 @@ const OverLay = (props) => {
                 <img src={glass} alt="glass" className="glass" />
               </div>
             </div>
-            <p className="modal-text">Type: {props.brewery.brewery_type}</p>
-            <p className="modal-text">
-              Address:{" "}
-              <a
-                href={`https://www.google.com/maps?q=${props.brewery.street},${props.brewery.postal_code}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {props.brewery.street}, {props.brewery.postal_code}
-              </a>
-            </p>
-            <p className="modal-text">
-              Phone: {formatNumber(props.brewery.phone)}
-            </p>
-            <p className="modal-text">
-              Website:{" "}
-              <a
-                href={props.brewery.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {props.brewery.website_url}
-              </a>
-            </p>
+            {renderType()}
+            {renderAddress()}
+            {renderPhoneNumber()}
+            {renderWebsite()}
             <div className={styles.buttonGroup}>
               <button
                 className={styles.modalButton}

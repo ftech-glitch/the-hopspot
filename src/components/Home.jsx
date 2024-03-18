@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./Details.module.css";
 import cheers from "./cheers.png";
 import glass from "./glass.png";
-import Search from "./Search";
 
 const Home = () => {
   const [randomBrewery, setRandomBrewery] = useState(null);
@@ -60,82 +59,65 @@ const Home = () => {
     return null;
   };
 
-  // ------------------------ adding data from open brewery list to airtable ------------------------ //
-  // before adding a new record, fetch existing records from airtable to check if the record already exists
-  // const checkForDuplicate = async (brewery) => {
-  //   const url = `https://api.airtable.com/v0/appQPGY7SNCdqDtdV/Table%201?filterByFormula=AND({Name} = '${brewery.name}', {City} = '${brewery.city}')`;
+  // handle phone function
+  const renderPhoneNumber = () => {
+    if (randomBrewery.phone) {
+      return (
+        <p className="modal-text">Phone: {formatNumber(randomBrewery.phone)}</p>
+      );
+    }
+    return <p className="modal-text">Phone: -</p>;
+  };
 
-  //   const response = await fetch(url, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer patxkA4uOl3Cyh9sV.adcda182ede1acc1b0a6684224f61b1b7d78439ac2f7376b6b09a554bdb8f675`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
+  // handle type function
+  const renderType = () => {
+    if (randomBrewery.brewery_type) {
+      return <p className="modal-text">Type: {randomBrewery.brewery_type}</p>;
+    }
+    return <p className="modal-text">Type: -</p>;
+  };
 
-  //   const data = await response.json();
-  //   return data.records.length > 0;
-  // };
+  // handle address function
+  const renderAddress = () => {
+    if (randomBrewery.street && randomBrewery.postal_code) {
+      return (
+        <p className="modal-text">
+          Address:{" "}
+          <a
+            href={`https://www.google.com/maps?q=${randomBrewery.street},${randomBrewery.postal_code}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {randomBrewery.street}, {randomBrewery.postal_code}
+          </a>
+        </p>
+      );
+    }
+    return <p className="modal-text">Address: -</p>;
+  };
 
-  // post & match brewery and airtable fields
-  // const postBreweryToAirtable = async (brewery) => {
-  //   const isDuplicate = await checkForDuplicate(brewery);
-  //   if (isDuplicate) {
-  //     console.log(`Duplicate brewery found: ${brewery.name}`);
-  //     return; // skip adding if a duplicate is found
-  //   }
-  //   const url = `https://api.airtable.com/v0/appQPGY7SNCdqDtdV/Table%201`;
-
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: `Bearer patxkA4uOl3Cyh9sV.adcda182ede1acc1b0a6684224f61b1b7d78439ac2f7376b6b09a554bdb8f675`,
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       fields: {
-  //         Name: brewery.name,
-  //         Type: brewery.brewery_type,
-  //         City: brewery.city,
-  //         State: brewery.state_province,
-  //         Address: brewery.street,
-  //         Postal: brewery.postal_code,
-  //         Contact: brewery.phone,
-  //         Website: brewery.website_url,
-  //       },
-  //     }),
-  //   });
-
-  //   if (!response.ok) {
-  //     throw new Error(
-  //       `Failed to post brewery to Airtable: ${response.statusText}`
-  //     );
-  //   }
-
-  //   return response.json();
-  // };
-
-  // add all breweries to airtable
-  // const addBreweriesToAirtable = async () => {
-  //   for (const brewery of allBreweries) {
-  //     try {
-  //       await postBreweryToAirtable(brewery);
-  //       console.log(`Added brewery: ${brewery.name}`);
-  //     } catch (error) {
-  //       console.error(`Error adding brewery: ${error.message}`);
-  //     }
-  //   }
-  // };
-
-  // automatically add all breweries to airtable after fetching
-  // useEffect(() => {
-  //   if (!loading && !hasMore) addBreweriesToAirtable();
-  // }, [loading, hasMore]);
+  // handle website function
+  const renderWebsite = () => {
+    if (randomBrewery.website_url) {
+      return (
+        <p className="modal-text">
+          Website:{" "}
+          <a
+            href={randomBrewery.website_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {randomBrewery.website_url}
+          </a>
+        </p>
+      );
+    }
+    return <p className="modal-text">Website: -</p>;
+  };
 
   return (
     <>
       <br />
-      {/* headers */}
       <div className="image-container">
         <img src={cheers} alt="cheers" className="cheers" />
       </div>
@@ -183,31 +165,10 @@ const Home = () => {
             </div>
             <br />
             <p className="modal-text">Name: {randomBrewery.name}</p>
-
-            <p className="modal-text">
-              Address:{" "}
-              <a
-                href={`https://www.google.com/maps?q=${randomBrewery.street},${randomBrewery.postal_code}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {randomBrewery.street}, {randomBrewery.postal_code},{" "}
-                {randomBrewery.city}, {randomBrewery.state}
-              </a>
-            </p>
-            <p className="modal-text">
-              Phone: {formatNumber(randomBrewery.phone)}
-            </p>
-            <p className="modal-text">
-              Website:{" "}
-              <a
-                href={randomBrewery.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {randomBrewery.website_url}
-              </a>
-            </p>
+            {renderType()}
+            {renderAddress()}
+            {renderPhoneNumber()}
+            {renderWebsite()}
             <div className={styles.buttonGroup}>
               <button className={styles.modalButton} onClick={handleCloseModal}>
                 close

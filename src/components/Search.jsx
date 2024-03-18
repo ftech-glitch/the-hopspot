@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DetailsModal from "./DetailsModal";
 
-const Search = () => {
+const Search = (props) => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [breweries, setBreweries] = useState([]);
@@ -126,6 +126,7 @@ const Search = () => {
           getBreweries={getBreweries}
           handleCloseModal={handleCloseModal}
           setEditMode={setEditMode}
+          formatNumber={props.formatNumber}
         ></DetailsModal>
       )}
       <main>
