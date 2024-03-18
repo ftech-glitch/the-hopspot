@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DetailsModal from "./DetailsModal";
 
-const Search = (props) => {
+const Search = () => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [breweries, setBreweries] = useState([]);
