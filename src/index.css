@@ -132,11 +132,6 @@ a {
   }
 }
 
-.modal-text {
-  color: black;
-  text-align: left;
-}
-
 .cheers {
   width: 200px;
   height: auto;
@@ -145,4 +140,25 @@ a {
 .glass {
   width: 50px;
   height: auto;
+}
+
+.random-brewery {
+  text-align: center;
+  color: black;
+}
+
+.row.text-center {
+  margin-left: 100px;
+}
+
+.row label {
+  margin-left: 100px;
+  text-align: left;
+}
+
+.modal-text {
+  color: black;
+  text-align: left;
+  margin-left: 150px;
+  margin-bottom: 10px;
 }

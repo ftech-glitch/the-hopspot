@@ -24,3 +24,24 @@
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.modalButton {
+  padding: 8px 16px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modalButton:hover {
+  background-color: grey;
+}

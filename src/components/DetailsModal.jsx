@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Details.module.css";
 import UpdateForm from "./UpdateForm";
+import glass from "./glass.png";
 
 const OverLay = (props) => {
   const [editedBrewery, setEditedBrewery] = useState({
@@ -26,7 +27,7 @@ const OverLay = (props) => {
     }));
   };
 
-  // handle save edits
+  // update brewery
   const handleSaveChanges = async () => {
     try {
       const response = await fetch(
@@ -69,9 +70,46 @@ const OverLay = (props) => {
     }
   };
 
+  // delete brewery
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `https://api.airtable.com/v0/appQPGY7SNCdqDtdV/Table%201/${props.brewery.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer patxkA4uOl3Cyh9sV.adcda182ede1acc1b0a6684224f61b1b7d78439ac2f7376b6b09a554bdb8f675`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete brewery record");
+      }
+      props.getBreweries();
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error deleting brewery:", error);
+    }
+  };
+
   // handle cancel edits
   const handleCancel = () => {
     setEditMode(false);
+  };
+
+  // format phone number
+  const formatNumber = (phoneStr) => {
+    let cleaned = ("", phoneStr).replace(/\D/g, "");
+
+    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+    if (match) {
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
+    }
+
+    return null;
   };
 
   return (
@@ -85,11 +123,19 @@ const OverLay = (props) => {
             handleCancel={handleCancel}
           />
         ) : (
-          <div className="row">
-            <h5 className="modal-text">{props.brewery.name}</h5>
-            <br />
+          <div className="row align-items-center">
+            <div className="row align-items-center">
+              <div className="col-md-3 text-center">
+                <img src={glass} alt="glass" className="glass" />
+              </div>
+              <div className="col-md-6 text-center">
+                <h5 className="random-brewery">{props.brewery.name}</h5>
+              </div>
+              <div className="col-md-3 text-center">
+                <img src={glass} alt="glass" className="glass" />
+              </div>
+            </div>
             <p className="modal-text">Type: {props.brewery.brewery_type}</p>
-            <br />
             <p className="modal-text">
               Address:{" "}
               <a
@@ -100,9 +146,9 @@ const OverLay = (props) => {
                 {props.brewery.street}, {props.brewery.postal_code}
               </a>
             </p>
-            <br />
-            <p className="modal-text">Phone: {props.brewery.phone}</p>
-            <br />
+            <p className="modal-text">
+              Phone: {formatNumber(props.brewery.phone)}
+            </p>
             <p className="modal-text">
               Website:{" "}
               <a
@@ -113,13 +159,20 @@ const OverLay = (props) => {
                 {props.brewery.website_url}
               </a>
             </p>
-            <br />
-            <button className="col-md-1" onClick={() => setEditMode(true)}>
-              edit
-            </button>
-            <button className="col-md-1" onClick={handleCloseModal}>
-              close
-            </button>
+            <div className={styles.buttonGroup}>
+              <button
+                className={styles.modalButton}
+                onClick={() => setEditMode(true)}
+              >
+                edit
+              </button>
+              <button className={styles.modalButton} onClick={handleDelete}>
+                delete
+              </button>
+              <button className={styles.modalButton} onClick={handleCloseModal}>
+                close
+              </button>
+            </div>
           </div>
         )}
       </div>

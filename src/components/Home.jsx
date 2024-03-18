@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./Details.module.css";
 import cheers from "./cheers.png";
 import glass from "./glass.png";
+import Search from "./Search";
 
 const Home = () => {
   const [randomBrewery, setRandomBrewery] = useState(null);
@@ -44,6 +45,19 @@ const Home = () => {
   // close random brewery modal
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  // format phone number
+  const formatNumber = (phoneStr) => {
+    let cleaned = ("", phoneStr).replace(/\D/g, "");
+
+    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+    if (match) {
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
+    }
+
+    return null;
   };
 
   // ------------------------ adding data from open brewery list to airtable ------------------------ //
@@ -155,33 +169,46 @@ const Home = () => {
       {randomBrewery && showModal && (
         <div className={styles.backdrop}>
           <div className={styles.modal}>
-            <div className="row">
-              <h5 className="modal-text">Your Brewery of the Day: </h5>
-              <h5 className="modal-text">{randomBrewery.name}</h5>
+            <div className="row align-items-center">
+              <div className="col-md-3 text-center">
+                <img src={glass} alt="glass" className="glass" />
+              </div>
+              <div className="col-md-6 text-center">
+                <h5 className="random-brewery">Your Brewery of the Day </h5>
+              </div>
+              <div className="col-md-3 text-center">
+                <img src={glass} alt="glass" className="glass" />
+              </div>
+            </div>
+            <br />
+            <p className="modal-text">Name: {randomBrewery.name}</p>
 
-              <p className="modal-text">
-                Address:{" "}
-                <a
-                  href={`https://www.google.com/maps?q=${randomBrewery.street},${randomBrewery.postal_code}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {randomBrewery.street}, {randomBrewery.postal_code},{" "}
-                  {randomBrewery.city}, {randomBrewery.state}
-                </a>
-              </p>
-              <p className="modal-text">Phone: {randomBrewery.phone}</p>
-              <p className="modal-text">
-                Website:{" "}
-                <a
-                  href={randomBrewery.website_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {randomBrewery.website_url}
-                </a>
-              </p>
-              <button className="col-md-1" onClick={handleCloseModal}>
+            <p className="modal-text">
+              Address:{" "}
+              <a
+                href={`https://www.google.com/maps?q=${randomBrewery.street},${randomBrewery.postal_code}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {randomBrewery.street}, {randomBrewery.postal_code},{" "}
+                {randomBrewery.city}, {randomBrewery.state}
+              </a>
+            </p>
+            <p className="modal-text">
+              Phone: {formatNumber(randomBrewery.phone)}
+            </p>
+            <p className="modal-text">
+              Website:{" "}
+              <a
+                href={randomBrewery.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {randomBrewery.website_url}
+              </a>
+            </p>
+            <div className={styles.buttonGroup}>
+              <button className={styles.modalButton} onClick={handleCloseModal}>
                 close
               </button>
             </div>

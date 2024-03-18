@@ -64,6 +64,8 @@ const Add = () => {
 
   return (
     <>
+      <br />
+      <br />
       {/* form submission */}
       <form onSubmit={handleSubmit}>
         <div className="row">
@@ -163,7 +165,7 @@ const Add = () => {
         </div>
         <br />
         <br />
-        <div className="row">
+        <div className="row text-center">
           <button
             className="btn btn-dark mx-1 col-md-1"
             type="submit"

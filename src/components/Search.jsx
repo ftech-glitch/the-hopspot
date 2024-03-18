@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DetailsModal from "./DetailsModal";
 
-const Search = () => {
+const Search = (props) => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [breweries, setBreweries] = useState([]);
@@ -137,7 +137,7 @@ const Search = () => {
               value={input}
               placeholder="Search breweries"
               aria-label="Search"
-              className="form-control"
+              className="form-control rounded-right"
               onChange={(e) => setInput(e.target.value)}
             />
             <button
