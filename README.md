@@ -1,11 +1,11 @@
-# The HopSpot - Discover your next hopspot
+# The HopSpot
 
 ![image](https://github.com/ftech-glitch/the-hopspot/assets/101855038/8f8038e0-0cb4-4aa1-a5bf-3c94331ce803)
 
 
 ![image](https://github.com/ftech-glitch/the-hopspot/assets/101855038/f3280cf9-82ef-4e42-b4e8-50f9f9ed5be1)
 
-A web app for beer enthusiasts to discover new breweries in the United States. Users can generate a random brewery with a simple click, guiding them to hidden gems waiting to be explored. If they are in the mood for something specific, users can easily search for breweries by keyword and view detailed information (type, address, contact info, website).
+The ultimate web app for beer enthusiasts on the lookout for their next hoppy adventure across the United States. Users can generate a random brewery with a simple click, guiding them to hidden gems waiting to be explored. If they are in the mood for something specific, users can easily search for breweries by keyword and view detailed information (type, address, contact info, website).
 
 The HopSpot utilizes the Open Brewery DB API to fetch brewery data. For more information on the API endpoints and how to use them, visit the Open Brewery DB Documentation: https://openbrewerydb.org/documentation
 
@@ -13,8 +13,7 @@ The HopSpot utilizes the Open Brewery DB API to fetch brewery data. For more inf
 - React
 
 # Getting Started
-The HopSpot allows users to explore, search, and contribute to the database of breweries: 
-[https://nimble-brioche-173579.netlify.app](https://nimble-brioche-173579.netlify.app/)
+The HopSpot allows users to explore, search, and contribute to the database of breweries. Here's how:
 
 Navigating the App
 - Home Page: Start at the home page to access the main features.
@@ -36,10 +35,13 @@ Submitting a New Brewery
 - Fill out the form with the new brewery's details.
 - Click "Submit" to add the brewery to the database.
 
-# Next Steps
-
-- Favorite List: Save favourite breweries to a list
+# Coming Soon
+- Favorite List: Save favourite breweries to a list.
 - Explore by Type: Discover breweries by type, including micro, nano, regional, brewpub, and more.
 - Search by Location: Find breweries by city, state, or postal code.
-- Autocomplete: Use the search feature to get suggestions as you type, making it easier to find breweries by name.
 - Sort and Filter: Sort results by distance from an origin point or filter by various criteria to find the perfect brewery for your next visit.
+- User Log-in: Save preferences and customize your experience.
+- Rate and Review: Share opinions and experiences with others. 
+
+Ready to embark on your brewery quest? Start your journey now at The HopSpot: https://thehopspot.netlify.app/
+
