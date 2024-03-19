@@ -9,7 +9,8 @@ The ultimate web app for beer enthusiasts on the lookout for their next hoppy ad
 
 If they are in the mood for something specific, users can easily search for breweries by keyword and view detailed information (type, address, contact info, website).
 
-The HopSpot utilizes the Open Brewery DB API to fetch brewery data. For more information on the API endpoints and how to use them, visit the Open Brewery DB Documentation: https://openbrewerydb.org/documentation
+# Check out The HopSpot here
+https://thehopspot.netlify.app/
 
 # Technologies Used
 - React
@@ -44,7 +45,9 @@ Submitting a New Brewery
 - Search by Location: Find breweries by city, state, or postal code.
 - Sort and Filter: Sort results by distance from an origin point or filter by various criteria to find the perfect brewery for your next visit.
 - User Log-in: Save preferences and customize your experience.
-- Rate and Review: Share opinions and experiences with others. 
+- Rate and Review: Share opinions and experiences with others.
 
-Ready to embark on your brewery quest? Start your journey here: https://thehopspot.netlify.app/
+# Reference
+- Open Brewery DB API: https://openbrewerydb.org/documentation
+- "Open-Brewery-React" by ramos07: https://github.com/ramos07/Open-Brewery-React 
 
